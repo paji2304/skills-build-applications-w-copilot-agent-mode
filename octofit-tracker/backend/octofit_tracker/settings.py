@@ -25,7 +25,15 @@ SECRET_KEY = 'django-insecure-qb*)#u1j2!-789jp$yxj=5@5t2g@svrc5m^ypnfuorxecie6k2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+import os
+CODESPACE_NAME = os.environ.get('CODESPACE_NAME')
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if CODESPACE_NAME:
+    ALLOWED_HOSTS.append(f'{CODESPACE_NAME}-8000.app.github.dev')
+    ALLOWED_HOSTS.append(f'{CODESPACE_NAME}-3000.app.github.dev')
+    ALLOWED_HOSTS.append(f'{CODESPACE_NAME}-.app.github.dev')  # wildcard for any port
+    ALLOWED_HOSTS.append(f'.app.github.dev')  # allow any codespace subdomain
 
 
 # Application definition
